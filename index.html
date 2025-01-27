@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Links</title>
+    <style>
+
+    @font-face {
+    font-family: 'GODOFWAR';
+    src: url('./GODOFWAR.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+    }
+
+    @font-face {
+    font-family: 'Warsuck';
+    src: url('./Warsuck.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+
+    }
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Warsuck', sans-serif;
+            background-color: #000; /* Dark background */
+            color: #fff; /* White text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Intro Section */
+        .intro {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .intro h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #bbb;
+            margin-bottom: 30px;
+        }
+
+        /* Body Image */
+        .main-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Links Section */
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        /* Image Button Styles */
+        .link-btn {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            text-decoration: none;
+            border-radius: 10px;
+            overflow: hidden;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .link-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%);
+            transition: filter 0.3s ease;
+        }
+
+        .link-btn:hover img {
+            filter: brightness(100%);
+        }
+
+        .link-btn span {
+            font-family: 'GODOFWAR', Arial, sans-serif; /* Use the Empire font */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.0);
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .link-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Discord Button (Stock Button Styling) */
+        .stock-btn span {
+            color: #5865F2; /* Discord Blue */
+            font-weight: bold;
+            text-shadow: none; /* No shadow to make the blue color pop */
+        }
+
+        .stock-btn:hover {
+            transform: none;
+            box-shadow: 0 4px 15px rgb(255, 252, 252); /* Maintain static hover effect */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        footer a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Section -->
+    <div class="intro">
+        <h1>My Link website</h1>
+        <p>All my links in one Website.</p>
+    </div>
+
+<!-- Body Image -->
+<img src="https://media.discordapp.net/attachments/1107372001703764001/1332263171288993854/4c00197291c67f78ef091f6205f60445.png?ex=679892c4&is=67974144&hm=bd54943d1a07aa25188149b135bac3a85f9a904920af54b4a22fd80d6551f22d&=&format=webp&quality=lossless" alt="Website Main Image" class="main-image">
+
+<!-- Links Section -->
+<div class="links-container">
+    <!-- Roblox Profile -->
+    <a class="link-btn" href="https://www.roblox.com/users/1075639086/profile" target="_blank">
+        <img src="https://static.wikia.nocookie.net/logopedia/images/0/07/Roblox_icon_2006.svg/revision/latest?cb=20220319140509" alt="Roblox Icon">
+        <span>Roblox Profile</span>
+    </a>
+
+    <!-- Discord Server -->
+    <a class="link-btn" href="https://discord.gg/wgU449mk4d" target="_blank">
+        <img src="https://media.discordapp.net/attachments/1107372001703764001/1333519670589788181/icon_pfp.png?ex=67993079&is=6797def9&hm=0265fa7cb4ef3d359441bbf92f7de45b2061a04d6033d1ac551fe79de7170880&=&format=webp&quality=lossless" alt="Discord Server Icon">
+        <span>Discord Server</span>
+    </a>
+
+    <!-- Add Discord -->
+    <div class="link-btn stock-btn">
+        <img src="https://www.iconarchive.com/download/i111317/fa-team/fontawesome-brands/FontAwesome-Brands-Discord.1024.png" alt="Discord Icon">
+        <span>Add Discord = @inceptual</span>
+    </div>
+
+    <!-- Instagram Link -->
+    <a class="link-btn" href="https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram Logo">
+        <span>IG</span>
+    </a>
+
+    <!-- Game Link -->
+    <a class="link-btn" href="https://www.roblox.com/games/10153090410/DROPSHIFT-alpha">
+        <img src="https://tr.rbxcdn.com/180DAY-1f1242614b82cf0a6bd07c68b94942ea/768/432/Image/Webp/noFilter" alt="Game Thumbnail">
+        <span>Game</span>
+    </a>
+</div>
+
+    
+
+    <!-- Footer -->
+    <footer>
+        <p>⟡<a href="https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet" target="_blank">inceptivity</a></p>
+    </footer>
+</body>
+</html>
