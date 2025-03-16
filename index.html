@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Links</title>
+    <meta name="description" content="All my links in one place with a Frutiger Aero twist and Windows nostalgia.">
+    <meta name="keywords" content="links, Roblox, Discord, Instagram, game, Frutiger Aero, Windows XP">
+    <title>My Links - Frutiger Aero Edition</title>
     <style>
         @font-face {
             font-family: 'GODOFWAR';
@@ -28,7 +30,6 @@
 
         body {
             font-family: 'Warsuck', sans-serif;
-            background-color: #e0f7fa; /* Light blue background */
             color: #333;
             display: flex;
             flex-direction: column;
@@ -37,14 +38,17 @@
             min-height: 100vh;
             overflow-x: hidden;
             cursor: url('custom-cursor.png'), auto;
-            background-image: url('https://i.pinimg.com/736x/6c/9e/20/6c9e20f0748c71c6088261bfd693f674.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            transition: background 0.5s ease, filter 0.3s ease;
         }
 
-        /* Overlay to lighten the background image */
+        body.dark-theme {
+            filter: brightness(85%);
+        }
+
         body::before {
             content: '';
             position: fixed;
@@ -52,29 +56,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(224, 247, 250, 0.7); /* Light blue overlay */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(3px);
             z-index: -1;
+        }
+
+        /* Particle Background */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        /* Cursor Trail */
+        .cursor-trail {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transition: transform 0.2s ease, opacity 0.3s ease;
         }
 
         /* Intro Section */
         .intro {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             animation: fadeIn 2s ease-in-out;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .intro h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: bold;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #00bcd4, #0097a7, #00bcd4);
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00ddeb, #ff6f91, #00ddeb);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            animation: rainbowText 5s linear infinite;
+            animation: rainbowText 6s linear infinite;
         }
 
         @keyframes rainbowText {
@@ -83,58 +113,65 @@
         }
 
         .intro p {
-            font-size: 1.2rem;
-            color: #555;
+            font-size: 1.3rem;
+            color: #444;
             margin-bottom: 30px;
         }
 
-        /* Body Image */
+        /* Main Image */
         .main-image {
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
             height: auto;
-            margin-bottom: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: float 3s ease-in-out infinite;
+            margin-bottom: 30px;
+            border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            animation: float 4s ease-in-out infinite;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.05);
+            filter: brightness(110%);
         }
 
         /* Links Section */
         .links-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
             width: 90%;
-            max-width: 800px;
+            max-width: 1200px;
+            padding: 20px;
         }
 
-        /* Image Button Styles */
+        /* Button Styles */
         .link-btn {
             position: relative;
-            width: 200px;
-            height: 120px;
+            width: 100%;
+            height: 140px;
             text-decoration: none;
-            border-radius: 20px;
+            border-radius: 25px;
             overflow: hidden;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background: linear-gradient(145deg, #00bcd4, #0097a7);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            background: linear-gradient(145deg, #00ddeb, #ff6f91);
+            border: 2px solid rgba(255, 255, 255, 0.6);
         }
 
         .link-btn img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(70%);
-            transition: filter 0.3s ease;
+            filter: brightness(60%) blur(2px);
+            transition: all 0.4s ease;
         }
 
         .link-btn:hover img {
-            filter: brightness(100%);
+            filter: brightness(100%) blur(0);
         }
 
         .link-btn span {
@@ -143,41 +180,168 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: #fff;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
             text-transform: uppercase;
             z-index: 2;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .link-btn:hover span {
+            transform: translate(-50%, -50%) scale(1.15);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .link-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
         }
 
-        /* Discord Button (Stock Button Styling) */
+        .link-btn:focus {
+            outline: 3px solid #fff;
+            outline-offset: 3px;
+        }
+
+        /* Special Buttons */
+        .action-btn {
+            background: linear-gradient(145deg, #ff6f91, #ffe29f);
+            cursor: pointer;
+        }
+
         .stock-btn span {
             color: #5865F2;
-            font-weight: bold;
             text-shadow: none;
         }
 
-        .stock-btn:hover {
-            transform: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        /* Control Panel */
+        .control-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 10px;
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 101;
+            backdrop-filter: blur(10px);
+        }
+
+        .settings-panel h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .settings-panel label {
+            display: block;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        /* Clock Widget */
+        .clock-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Weather Widget */
+        .weather-widget {
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            color: #333;
+            font-size: 1rem;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 221, 235, 0.9);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 102;
+            animation: slideIn 0.5s ease forwards, slideOut 0.5s ease 2.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(-50%) translateY(0); opacity: 1; }
+            to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
         }
 
         /* Footer */
         footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #555;
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #444;
             animation: fadeIn 2s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
 
         footer a {
-            color: #00bcd4;
+            color: #00ddeb;
             text-decoration: none;
         }
 
@@ -185,15 +349,34 @@
             text-decoration: underline;
         }
 
+        #muteBtn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #00ddeb;
+            transition: color 0.3s ease;
+        }
+
+        #muteBtn:hover {
+            color: #ff6f91;
+        }
+
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         /* Loading Screen */
@@ -203,12 +386,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #e0f7fa;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            animation: fadeOut 2s ease-in-out forwards;
+            animation: fadeOut 2.5s ease-in-out forwards;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #00ddeb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes fadeOut {
@@ -217,53 +416,93 @@
         }
 
         .loading-screen h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #333;
             animation: loadingText 1.5s ease-in-out infinite;
         }
 
         @keyframes loadingText {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+            0% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.9); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .links-container {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .intro h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
-
             .intro p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
-
             .link-btn {
-                width: 150px;
-                height: 90px;
+                height: 120px;
             }
-
             .link-btn span {
-                font-size: 1rem;
+                font-size: 1.2rem;
+            }
+            .control-panel, .settings-panel {
+                flex-direction: column;
+                top: 10px;
+                right: 10px;
             }
         }
 
         @media (max-width: 480px) {
             .intro h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
-
             .intro p {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
-
             .link-btn {
-                width: 120px;
-                height: 70px;
+                height: 100px;
             }
-
             .link-btn span {
-                font-size: 0.9rem;
+                font-size: 1rem;
+            }
+            .main-image {
+                max-width: 100%;
             }
         }
     </style>
@@ -271,73 +510,439 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen">
+        <div class="spinner"></div>
         <h1>Loading...</h1>
+    </div>
+
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <button class="control-btn" id="themeToggle">Toggle Theme</button>
+        <button class="control-btn" id="randomColor">Random Color</button>
+        <button class="control-btn" id="showModal">Info</button>
+        <button class="control-btn" id="settingsBtn">Settings</button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <h3>Settings</h3>
+        <label><input type="checkbox" id="cursorTrailToggle" checked> Enable Cursor Trail</label>
+        <label><input type="checkbox" id="particlesToggle" checked> Enable Particles</label>
+        <label><input type="checkbox" id="windowsSoundsToggle" checked> Enable Windows Sounds</label>
+        <label>Sound Volume: <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1"></label>
+        <label>Particle Density: <input type="range" id="particleDensity" min="20" max="100" step="10" value="50"></label>
     </div>
 
     <!-- Intro Section -->
     <div class="intro">
         <h1>My Link Website</h1>
-        <p>All my links in one place.</p>
+        <p>All my links in one place with a Frutiger Aero vibe and Windows XP nostalgia.</p>
     </div>
 
-    <!-- Body Image -->
-    <img src="https://i.pinimg.com/originals/60/d8/d9/60d8d9e24ca250b599c9806cd81edc43.gif" alt="Website Main Image" class="main-image">
+    <!-- Main Image -->
+    <img src="https://github.com/Inceptual/Linkwebsite/blob/main/Camera.gif?raw=true" alt="Website Main Image" class="main-image">
 
     <!-- Links Section -->
     <div class="links-container">
         <!-- Roblox Profile -->
-        <a class="link-btn" href="https://www.roblox.com/users/1075639086/profile" target="_blank">
-            <img src="https://tr.rbxcdn.com/30DAY-Avatar-9AB3D98EB9C0B482DE76EB9EABF6180D-Png/352/352/Avatar/Webp/noFilter" alt="Roblox Icon">
+        <a class="link-btn" href="https://www.roblox.com/users/1075639086/profile" target="_blank" aria-label="Roblox Profile">
+            <img src="https://tr.rbxcdn.com/30DAY-Avatar-9AB3D98EB9C0B482DE76EB9EABF6180D-Png/352/352/Avatar/Webp/noFilter" alt="">
             <span>Roblox Profile</span>
         </a>
 
         <!-- Discord Server -->
-        <a class="link-btn" href="https://discord.gg/wgU449mk4d" target="_blank">
-            <img src="https://media.discordapp.net/attachments/1107372001703764001/1338791904388583474/icon_pfp.png?ex=67ac5e9f&is=67ab0d1f&hm=98d0926d3d34b9b2176caeb5fa6d5280685586838e3b1b6d031449ba885db796&=&format=webp&quality=lossless" alt="Discord Server Icon">
+        <a class="link-btn" href="https://discord.gg/CufQSvGrfx" target="_blank" aria-label="Discord Server For DROPSHIFT">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2nHeo6lNQM6sO5waCE4RNZlU-bnGWdc7RAg&s" alt="">
             <span>Discord Server</span>
         </a>
 
-        <!-- Add Discord -->
-        <div class="link-btn stock-btn">
-            <img src="https://www.iconarchive.com/download/i111317/fa-team/fontawesome-brands/FontAwesome-Brands-Discord.1024.png" alt="Discord Icon">
-            <span>Add Discord = @inceptual</span>
-        </div>
+        <!-- Copy Discord -->
+        <button class="link-btn stock-btn" onclick="copyDiscordTag()" aria-label="Copy Discord tag: @inceptual">
+            <img src="https://wallpapers.com/images/hd/pure-black-background-y8wp2r83b15xxdi6.jpg" alt="">
+            <span>@inceptual</span>
+        </button>
 
         <!-- Instagram Link -->
-        <a class="link-btn" href="https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram Logo">
-            <span>IG</span>
+        <a class="link-btn" href="https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Instagram">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="">
+            <span>Instagram</span>
         </a>
 
         <!-- Game Link -->
-        <a class="link-btn" href="https://www.roblox.com/games/10153090410/DROPSHIFT-alpha">
-            <img src="https://tr.rbxcdn.com/180DAY-1f1242614b82cf0a6bd07c68b94942ea/768/432/Image/Webp/noFilter" alt="Game Thumbnail">
+        <a class="link-btn" href="https://www.roblox.com/games/10153090410/DROPSHIFT-alpha" target="_blank" aria-label="Game">
+            <img src="https://tr.rbxcdn.com/180DAY-1f1242614b82cf0a6bd07c68b94942ea/768/432/Image/Webp/noFilter" alt="">
             <span>Game</span>
         </a>
+
+        <!-- Action Buttons -->
+        <button class="link-btn action-btn" onclick="triggerPulse()" aria-label="Pulse Animation">
+            <img src="https://via.placeholder.com/200x120.png?text=Pulse" alt="">
+            <span>Pulse</span>
+        </button>
+
+        <button class="link-btn action-btn" onclick="openRandomLink()" aria-label="Random Link">
+            <img src="https://via.placeholder.com/200x120.png?text=Random" alt="">
+            <span>Random Link</span>
+        </button>
     </div>
+
+    <!-- Clock Widget -->
+    <div class="clock-widget" id="clock">00:00:00</div>
+
+    <!-- Weather Widget -->
+    <div class="weather-widget" id="weather">Weather: Loading...</div>
 
     <!-- Footer -->
     <footer>
         <p>⟡<a href="https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet" target="_blank">inceptivity</a></p>
+        <button id="muteBtn">🔊</button>
     </footer>
 
-    <!-- Sound Effects -->
-    <audio id="hoverSound" src="hover-sound.mp3"></audio>
-    <audio id="clickSound" src="click-sound.mp3"></audio>
+    <!-- Modal -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">×</span>
+            <h2>About This Site</h2>
+            <p>This is a Frutiger Aero-inspired link page with Windows XP sounds and advanced interactivity. Enjoy the glossy vibes!</p>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="hoverSound"></audio>
+    <audio id="clickSound"></audio>
+    <audio id="pulseSound"></audio>
+    <audio id="startupSound"></audio>
+    <audio id="errorSound"></audio>
 
     <script>
-        // Add sound effects on hover and click
+        // Random Frutiger Aero Backgrounds from Pinterest
+        const frutigerBackgrounds = [
+            'https://i.pinimg.com/originals/45/12/3e/45123e3e8b87c7b7f6d8e8e0b7f1b2e3.jpg',
+            'https://i.pinimg.com/originals/7c/8f/5b/7c8f5b8e7e8e8e8e8e8e8e8e8e8e8e8e.jpg',
+            'https://i.pinimg.com/originals/9e/3b/4e/9e3b4e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg',
+            'https://i.pinimg.com/originals/2d/5f/8e/2d5f8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg'
+        ];
+
+        function setRandomBackground() {
+            const randomIndex = Math.floor(Math.random() * frutigerBackgrounds.length);
+            document.body.style.backgroundImage = `url(${frutigerBackgrounds[randomIndex]})`;
+            document.body.style.backgroundColor = 'transparent';
+        }
+
+        // Sound Sources
+        const soundSources = {
+            hover: [
+                'https://www.myinstants.com/media/sounds/frutiger-hover.mp3', // Placeholder
+                'https://www.myinstants.com/media/sounds/wii-menu-hover.mp3'  // Placeholder
+            ],
+            click: [
+                'https://www.myinstants.com/media/sounds/windows-xp-click.mp3',
+                'https://www.myinstants.com/media/sounds/frutiger-click.mp3'  // Placeholder
+            ],
+            pulse: [
+                'https://www.myinstants.com/media/sounds/frutiger-pulse.mp3', // Placeholder
+                'https://www.myinstants.com/media/sounds/aero-chime.mp3'     // Placeholder
+            ],
+            startup: [
+                'https://www.myinstants.com/media/sounds/windows-xp-startup.mp3',
+                'https://www.myinstants.com/media/sounds/vista-startup.mp3'   // Placeholder
+            ],
+            error: [
+                'https://www.myinstants.com/media/sounds/windows-xp-error.mp3',
+                'https://www.myinstants.com/media/sounds/aero-error.mp3'     // Placeholder
+            ]
+        };
+
+        function setRandomSound(elementId, soundType) {
+            const soundElement = document.getElementById(elementId);
+            const randomIndex = Math.floor(Math.random() * soundSources[soundType].length);
+            soundElement.src = soundSources[soundType][randomIndex];
+        }
+
+        // Initialize Sounds
+        function initializeSounds() {
+            setRandomSound('hoverSound', 'hover');
+            setRandomSound('clickSound', 'click');
+            setRandomSound('pulseSound', 'pulse');
+            setRandomSound('startupSound', 'startup');
+            setRandomSound('errorSound', 'error');
+        }
+
+        // Sound Effects
         const buttons = document.querySelectorAll('.link-btn');
         const hoverSound = document.getElementById('hoverSound');
         const clickSound = document.getElementById('clickSound');
+        const pulseSound = document.getElementById('pulseSound');
+        const startupSound = document.getElementById('startupSound');
+        const errorSound = document.getElementById('errorSound');
+        let isMuted = false;
+        const muteBtn = document.getElementById('muteBtn');
+        let windowsSoundsEnabled = true;
+        const volumeControl = document.getElementById('volumeControl');
+
+        muteBtn.addEventListener('click', () => {
+            isMuted = !isMuted;
+            muteBtn.textContent = isMuted ? '🔇' : '🔊';
+            updateVolume();
+        });
+
+        volumeControl.addEventListener('input', updateVolume);
+
+        function updateVolume() {
+            const volume = isMuted ? 0 : volumeControl.value;
+            hoverSound.volume = volume;
+            clickSound.volume = volume;
+            pulseSound.volume = volume;
+            startupSound.volume = volume;
+            errorSound.volume = volume;
+        }
 
         buttons.forEach(button => {
             button.addEventListener('mouseenter', () => {
-                hoverSound.play();
+                if (!isMuted) hoverSound.play();
             });
             button.addEventListener('click', () => {
-                clickSound.play();
+                if (!isMuted && windowsSoundsEnabled) clickSound.play();
             });
+        });
+
+        // Play Startup Sound and Set Background on Load
+        window.addEventListener('load', () => {
+            initializeSounds();
+            if (!isMuted && windowsSoundsEnabled) startupSound.play();
+            setRandomBackground();
+            showNotification('Welcome to My Link Page!');
+            updateVolume();
+        });
+
+        // Copy Discord Tag
+        function copyDiscordTag() {
+            navigator.clipboard.writeText('@inceptual').then(() => {
+                showNotification('Discord tag copied to clipboard!');
+                if (!isMuted && windowsSoundsEnabled) clickSound.play();
+            }).catch(() => {
+                if (!isMuted && windowsSoundsEnabled) errorSound.play();
+            });
+        }
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            if (!isMuted && windowsSoundsEnabled) clickSound.play();
+        });
+
+        // Random Background Color
+        const randomColor = document.getElementById('randomColor');
+        randomColor.addEventListener('click', () => {
+            const r = Math.floor(Math.random() * 255);
+            const g = Math.floor(Math.random() * 255);
+            const b = Math.floor(Math.random() * 255);
+            document.body.style.background = `linear-gradient(135deg, rgb(${r}, ${g}, ${b}), rgb(${g}, ${b}, ${r}))`;
+            document.body.style.backgroundImage = 'none';
+            if (!isMuted && windowsSoundsEnabled) clickSound.play();
+        });
+
+        // Pulse Animation
+        function triggerPulse() {
+            document.body.style.animation = 'pulse 1s ease';
+            if (!isMuted) pulseSound.play();
+            setTimeout(() => document.body.style.animation = '', 1000);
+        }
+
+        // Random Link
+        const links = [
+            'https://www.roblox.com/users/1075639086/profile',
+            'https://discord.gg/CufQSvGrfx',
+            'https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet',
+            'https://www.roblox.com/games/10153090410/DROPSHIFT-alpha'
+        ];
+        function openRandomLink() {
+            const randomIndex = Math.floor(Math.random() * links.length);
+            window.open(links[randomIndex], '_blank');
+            if (!isMuted && windowsSoundsEnabled) clickSound.play();
+        }
+
+        // Clock Widget
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            document.getElementById('clock').textContent = time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Weather Widget (Mock Data)
+        function updateWeather() {
+            const mockWeather = `Weather: Sunny, 72°F`; // Replace with real API call if desired
+            document.getElementById('weather').textContent = mockWeather;
+        }
+        updateWeather();
+
+        // Modal
+        const modal = document.getElementById('infoModal');
+        const showModal = document.getElementById('showModal');
+        const closeModal = document.getElementById('closeModal');
+
+        showModal.addEventListener('click', () => {
+            modal.style.display = 'flex';
+            if (!isMuted && windowsSoundsEnabled) clickSound.play();
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+            if (!isMuted && windowsSoundsEnabled) clickSound.play();
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                if (!isMuted && windowsSoundsEnabled) clickSound.play();
+            }
+        });
+
+        // Settings Panel
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const cursorTrailToggle = document.getElementById('cursorTrailToggle');
+        const particlesToggle = document.getElementById('particlesToggle');
+        const windowsSoundsToggle = document.getElementById('windowsSoundsToggle');
+        const particleDensity = document.getElementById('particleDensity');
+
+        settingsBtn.addEventListener('click', () => {
+            settingsPanel.style.display = settingsPanel.style.display === 'block' ? 'none' : 'block';
+            if (!isMuted && windowsSoundsEnabled) clickSound.play();
+        });
+
+        windowsSoundsToggle.addEventListener('change', () => {
+            windowsSoundsEnabled = windowsSoundsToggle.checked;
+            if (!windowsSoundsEnabled && !isMuted) errorSound.play();
+        });
+
+        // Notification System
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Enhanced Particle Effect
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        let numberOfParticles = 50;
+        let particlesEnabled = true;
+        let mouse = { x: null, y: null };
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.01;
+
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    this.speedX += dx / 1000;
+                    this.speedY += dy / 1000;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            numberOfParticles = particleDensity.value;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            if (!particlesEnabled) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                if (particlesArray[i].size <= 0.2) {
+                    particlesArray.splice(i, 1);
+                    i--;
+                    particlesArray.push(new Particle());
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        particlesToggle.addEventListener('change', () => {
+            particlesEnabled = particlesToggle.checked;
+            if (particlesEnabled) animateParticles();
+            else ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+
+        particleDensity.addEventListener('change', initParticles);
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        initParticles();
+        animateParticles();
+
+        // Enhanced Cursor Trail
+        let trailEnabled = true;
+        const trailElements = [];
+
+        document.addEventListener('mousemove', (e) => {
+            if (!trailEnabled) return;
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = `${e.pageX - 6}px`;
+            trail.style.top = `${e.pageY - 6}px`;
+            trail.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+            document.body.appendChild(trail);
+            trailElements.push(trail);
+
+            setTimeout(() => {
+                trail.style.transform = 'scale(0)';
+                trail.style.opacity = '0';
+                setTimeout(() => {
+                    trail.remove();
+                    trailElements.shift();
+                }, 300);
+            }, 400);
+        });
+
+        cursorTrailToggle.addEventListener('change', () => {
+            trailEnabled = cursorTrailToggle.checked;
+            if (!trailEnabled) trailElements.forEach(el => el.remove());
         });
     </script>
 </body>
