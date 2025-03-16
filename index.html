@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="All my links in one place with a Frutiger Aero twist and Windows nostalgia.">
-    <meta name="keywords" content="links, Roblox, Discord, Instagram, game, Frutiger Aero, Windows XP">
-    <title>My Links - Frutiger Aero Edition</title>
+    <meta name="description" content="An advanced link hub with a Frutiger Aero aesthetic.">
+    <meta name="keywords" content="links, Roblox, Discord, Instagram, game, Frutiger Aero">
+    <title>My Advanced Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Open+Sans:wght@400;700&family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <style>
+        /* Custom Font Definitions */
         @font-face {
             font-family: 'GODOFWAR';
             src: url('./GODOFWAR.ttf') format('truetype');
@@ -21,7 +25,7 @@
             font-style: normal;
         }
 
-        /* General Styles */
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -29,354 +33,102 @@
         }
 
         body {
-            font-family: 'Warsuck', sans-serif;
-            color: #333;
+            font-family: 'Exo 2', 'Orbitron', 'Open Sans', sans-serif;
+            color: #e0f7fa;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
-            cursor: url('custom-cursor.png'), auto;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            transition: background 0.5s ease, filter 0.3s ease;
+            background: #0a1c2b;
+            position: relative;
+            cursor: none; /* Hide default cursor */
         }
 
-        body.dark-theme {
-            filter: brightness(85%);
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(0, 255, 234, 0.8), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 234, 0.5);
         }
 
-        body::before {
-            content: '';
+        .cursor-trail {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 255, 234, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.2s ease;
+        }
+
+        /* WebGL Canvas for Background */
+        #webgl-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(3px);
             z-index: -1;
         }
 
-        /* Particle Background */
-        #particles {
+        /* Lens Flare Effect */
+        .lens-flare {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 255, 234, 0.3), transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            animation: flareMove 20s infinite ease-in-out;
+        }
+
+        @keyframes flareMove {
+            0% { transform: translate(0, 0); opacity: 0.5; }
+            50% { transform: translate(50vw, 50vh); opacity: 0.8; }
+            100% { transform: translate(0, 0); opacity: 0.5; }
+        }
+
+        /* Particles */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-        }
-
-        /* Cursor Trail */
-        .cursor-trail {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
             pointer-events: none;
-            z-index: 999;
-            transition: transform 0.2s ease, opacity 0.3s ease;
+            z-index: 0;
         }
 
-        /* Intro Section */
-        .intro {
-            text-align: center;
-            padding: 30px;
-            animation: fadeIn 2s ease-in-out;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .intro h1 {
-            font-size: 3.5rem;
-            font-weight: bold;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #00ddeb, #ff6f91, #00ddeb);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            animation: rainbowText 6s linear infinite;
-        }
-
-        @keyframes rainbowText {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .intro p {
-            font-size: 1.3rem;
-            color: #444;
-            margin-bottom: 30px;
-        }
-
-        /* Main Image */
-        .main-image {
-            max-width: 700px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 30px;
-            border-radius: 25px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            animation: float 4s ease-in-out infinite;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .main-image:hover {
-            transform: scale(1.05);
-            filter: brightness(110%);
-        }
-
-        /* Links Section */
-        .links-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            width: 90%;
-            max-width: 1200px;
-            padding: 20px;
-        }
-
-        /* Button Styles */
-        .link-btn {
-            position: relative;
-            width: 100%;
-            height: 140px;
-            text-decoration: none;
-            border-radius: 25px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s ease;
-            background: linear-gradient(145deg, #00ddeb, #ff6f91);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-
-        .link-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(60%) blur(2px);
-            transition: all 0.4s ease;
-        }
-
-        .link-btn:hover img {
-            filter: brightness(100%) blur(0);
-        }
-
-        .link-btn span {
-            font-family: 'GODOFWAR', Arial, sans-serif;
+        .particle {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
-            text-transform: uppercase;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            width: 6px;
+            height: 6px;
+            background: rgba(0, 255, 234, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 255, 234, 0.5);
+            animation: floatParticle 15s infinite linear;
         }
 
-        .link-btn:hover span {
-            transform: translate(-50%, -50%) scale(1.15);
-            background: rgba(0, 0, 0, 0.7);
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(100vw, 100vh); opacity: 0; }
         }
 
-        .link-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-        }
-
-        .link-btn:focus {
-            outline: 3px solid #fff;
-            outline-offset: 3px;
-        }
-
-        /* Special Buttons */
-        .action-btn {
-            background: linear-gradient(145deg, #ff6f91, #ffe29f);
-            cursor: pointer;
-        }
-
-        .stock-btn span {
-            color: #5865F2;
-            text-shadow: none;
-        }
-
-        /* Control Panel */
-        .control-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 15px;
-            z-index: 100;
-        }
-
-        .control-btn {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 10px;
-            color: #333;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-
-        /* Settings Panel */
-        .settings-panel {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 101;
-            backdrop-filter: blur(10px);
-        }
-
-        .settings-panel h3 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .settings-panel label {
-            display: block;
-            margin: 10px 0;
-            color: #555;
-        }
-
-        /* Clock Widget */
-        .clock-widget {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            color: #333;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        /* Weather Widget */
-        .weather-widget {
-            position: fixed;
-            bottom: 70px;
-            left: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            color: #333;
-            font-size: 1rem;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 221, 235, 0.9);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 102;
-            animation: slideIn 0.5s ease forwards, slideOut 0.5s ease 2.5s forwards;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-
-        @keyframes slideOut {
-            from { transform: translateX(-50%) translateY(0); opacity: 1; }
-            to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 40px;
-            font-size: 1rem;
-            color: #444;
-            animation: fadeIn 2s ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        footer a {
-            color: #00ddeb;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        #muteBtn {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #00ddeb;
-            transition: color 0.3s ease;
-        }
-
-        #muteBtn:hover {
-            color: #ff6f91;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* Dark Mode */
+        body.dark-mode {
+            filter: brightness(70%) saturate(1.5);
         }
 
         /* Loading Screen */
@@ -386,48 +138,219 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            background: rgba(224, 247, 250, 0.95);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            animation: fadeOut 2.5s ease-in-out forwards;
+            z-index: 2000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #00ddeb;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+        .progress-container {
+            width: 80%;
+            max-width: 400px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+            border: 2px solid rgba(0, 255, 234, 0.5);
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #00bcd4, #4dd0e1, #00e676, #ff4081);
+            transition: width 0.1s linear;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 234, 0.8);
         }
 
         .loading-screen h1 {
             font-size: 2.5rem;
-            color: #333;
-            animation: loadingText 1.5s ease-in-out infinite;
+            color: #00bcd4;
+            text-shadow: 0 0 10px rgba(0, 255, 234, 0.8);
+            animation: pulseText 1.5s ease-in-out infinite;
         }
 
-        @keyframes loadingText {
-            0% { opacity: 0; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0.9); }
+        @keyframes pulseText {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
 
-        /* Modal */
+        /* Intro Section */
+        .intro {
+            text-align: center;
+            padding: 30px;
+            animation: fadeIn 2s ease-in-out;
+            background: rgba(0, 188, 212, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.4);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(0, 255, 234, 0.3);
+        }
+
+        .intro h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: #e0f7fa;
+            text-shadow: 0 0 20px rgba(0, 255, 234, 0.8), 0 0 10px rgba(0, 188, 212, 0.5);
+            background: linear-gradient(90deg, #00bcd4, #00e676, #ff4081);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transition: opacity 1s ease;
+            color: #b0e7f9;
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+        }
+
+        /* Main Image */
+        .main-image {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+            border-radius: 25px;
+            box-shadow: 0 0 40px rgba(0, 188, 212, 0.6);
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+            border: 3px solid rgba(0, 255, 234, 0.5);
+            filter: saturate(1.2);
+        }
+
+        .main-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 234, 0.4), transparent 60%);
+            pointer-events: none;
+            border-radius: 25px;
+            box-shadow: inset 0 0 30px rgba(0, 188, 212, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Links Container */
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            width: 90%;
+            max-width: 1000px;
+            padding: 20px;
+            background: rgba(0, 188, 212, 0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.3);
+            border: 2px solid rgba(0, 255, 234, 0.3);
+        }
+
+        /* Button Styles */
+        .link-btn {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            text-decoration: none;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 188, 212, 0.4), inset 0 0 15px rgba(0, 255, 234, 0.3);
+            background: linear-gradient(145deg, #00bcd4, #4dd0e1, #00e676, #ff4081);
+            border: 2px solid rgba(0, 255, 234, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            animation: slideIn 1s ease-out;
+        }
+
+        .link-btn:nth-child(1) { animation-delay: 0s; }
+        .link-btn:nth-child(2) { animation-delay: 0.2s; }
+        .link-btn:nth-child(3) { animation-delay: 0.4s; }
+        .link-btn:nth-child(4) { animation-delay: 0.6s; }
+        .link-btn:nth-child(5) { animation-delay: 0.8s; }
+        .link-btn:nth-child(6) { animation-delay: 1s; }
+        .link-btn:nth-child(7) { animation-delay: 1.2s; }
+
+        @keyframes slideIn {
+            from { transform: translateY(100%) scale(0.8); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .link-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(80%) saturate(1.5);
+            transition: filter 0.3s ease;
+        }
+
+        .link-btn:hover img {
+            filter: brightness(100%) saturate(2);
+        }
+
+        .link-btn span {
+            font-family: 'GODOFWAR', 'Exo 2', sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e0f7fa;
+            text-shadow: 0 0 15px rgba(0, 255, 234, 0.8);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 2;
+            border: 2px solid rgba(0, 255, 234, 0.5);
+        }
+
+        .link-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 188, 212, 0.6), inset 0 0 20px rgba(0, 255, 234, 0.4);
+            background: linear-gradient(145deg, #ff4081, #00e676, #4dd0e1, #00bcd4);
+        }
+
+        .link-btn:hover span {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 234, 0.8);
+        }
+
+        .link-btn:focus {
+            outline: 4px solid rgba(0, 255, 234, 0.8);
+            outline-offset: 2px;
+        }
+
+        /* Special Buttons */
+        .theme-btn, .modal-btn, .anim-btn {
+            background: linear-gradient(145deg, #26a69a, #4dd0e1, #00e676, #ff4081);
+        }
+
+        .theme-btn:hover, .modal-btn:hover, .anim-btn:hover {
+            background: linear-gradient(145deg, #ff4081, #00e676, #4dd0e1, #26a69a);
+        }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -435,36 +358,122 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
+            background: rgba(0, 28, 43, 0.9);
             justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(224, 247, 250, 0.95);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            animation: fadeIn 0.5s ease;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 40px rgba(0, 188, 212, 0.6);
+            position: relative;
+            animation: modalPop 0.3s ease-out;
+            border: 3px solid rgba(0, 255, 234, 0.5);
+            backdrop-filter: blur(8px);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            color: #00bcd4;
             cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #00e676;
+            transform: rotate(180deg);
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00bcd4;
+            text-shadow: 0 0 10px rgba(0, 255, 234, 0.8);
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
             color: #333;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 2s ease-in-out;
+            background: rgba(0, 188, 212, 0.15);
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.4);
+            border: 2px solid rgba(0, 255, 234, 0.3);
+        }
+
+        footer a {
+            color: #00e676;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ff4081;
+            text-decoration: none;
+            text-shadow: 0 0 15px rgba(0, 255, 234, 0.8);
+        }
+
+        #muteBtn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #e0f7fa;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        #muteBtn:hover {
+            color: #ff4081;
+            transform: scale(1.3);
+        }
+
+        /* Animation Effects */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         /* Responsive Design */
         @media (max-width: 1024px) {
             .links-container {
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+            .link-btn {
+                width: 180px;
+                height: 100px;
             }
         }
 
@@ -476,123 +485,112 @@
                 font-size: 1.1rem;
             }
             .link-btn {
-                height: 120px;
-            }
-            .link-btn span {
-                font-size: 1.2rem;
-            }
-            .control-panel, .settings-panel {
-                flex-direction: column;
-                top: 10px;
-                right: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .intro h1 {
-                font-size: 1.8rem;
-            }
-            .intro p {
-                font-size: 0.95rem;
-            }
-            .link-btn {
-                height: 100px;
+                width: 150px;
+                height: 90px;
             }
             .link-btn span {
                 font-size: 1rem;
             }
             .main-image {
-                max-width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro h1 {
+                font-size: 2rem;
+            }
+            .intro p {
+                font-size: 0.9rem;
+            }
+            .link-btn {
+                width: 120px;
+                height: 70px;
+            }
+            .link-btn span {
+                font-size: 0.9rem;
+            }
+            .main-image {
+                max-width: 300px;
+            }
+            .modal-content {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- WebGL Background -->
+    <div id="webgl-background"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursor-trail"></div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Lens Flares -->
+    <div class="lens-flare" style="top: 10%; left: 10%;"></div>
+    <div class="lens-flare" style="top: 60%; left: 80%; animation-delay: 5s;"></div>
+
     <!-- Loading Screen -->
     <div class="loading-screen">
-        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
         <h1>Loading...</h1>
-    </div>
-
-    <!-- Particle Background -->
-    <canvas id="particles"></canvas>
-
-    <!-- Control Panel -->
-    <div class="control-panel">
-        <button class="control-btn" id="themeToggle">Toggle Theme</button>
-        <button class="control-btn" id="randomColor">Random Color</button>
-        <button class="control-btn" id="showModal">Info</button>
-        <button class="control-btn" id="settingsBtn">Settings</button>
-    </div>
-
-    <!-- Settings Panel -->
-    <div class="settings-panel" id="settingsPanel">
-        <h3>Settings</h3>
-        <label><input type="checkbox" id="cursorTrailToggle" checked> Enable Cursor Trail</label>
-        <label><input type="checkbox" id="particlesToggle" checked> Enable Particles</label>
-        <label><input type="checkbox" id="windowsSoundsToggle" checked> Enable Windows Sounds</label>
-        <label>Sound Volume: <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1"></label>
-        <label>Particle Density: <input type="range" id="particleDensity" min="20" max="100" step="10" value="50"></label>
     </div>
 
     <!-- Intro Section -->
     <div class="intro">
-        <h1>My Link Website</h1>
-        <p>All my links in one place with a Frutiger Aero vibe and Windows XP nostalgia.</p>
+        <h1><span id="typing-text"></span></h1>
+        <p>All my links in one futuristic hub.</p>
     </div>
 
-    <!-- Main Image -->
+    <!-- Main Image (GIF) -->
     <img src="https://github.com/Inceptual/Linkwebsite/blob/main/Camera.gif?raw=true" alt="Website Main Image" class="main-image">
 
     <!-- Links Section -->
     <div class="links-container">
-        <!-- Roblox Profile -->
         <a class="link-btn" href="https://www.roblox.com/users/1075639086/profile" target="_blank" aria-label="Roblox Profile">
             <img src="https://tr.rbxcdn.com/30DAY-Avatar-9AB3D98EB9C0B482DE76EB9EABF6180D-Png/352/352/Avatar/Webp/noFilter" alt="">
             <span>Roblox Profile</span>
         </a>
-
-        <!-- Discord Server -->
         <a class="link-btn" href="https://discord.gg/CufQSvGrfx" target="_blank" aria-label="Discord Server For DROPSHIFT">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2nHeo6lNQM6sO5waCE4RNZlU-bnGWdc7RAg&s" alt="">
             <span>Discord Server</span>
         </a>
-
-        <!-- Copy Discord -->
-        <button class="link-btn stock-btn" onclick="copyDiscordTag()" aria-label="Copy Discord tag: @inceptual">
+        <button class="link-btn" onclick="copyDiscordTag()" aria-label="Copy Discord tag: @inceptual">
             <img src="https://wallpapers.com/images/hd/pure-black-background-y8wp2r83b15xxdi6.jpg" alt="">
             <span>@inceptual</span>
         </button>
-
-        <!-- Instagram Link -->
         <a class="link-btn" href="https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Instagram">
             <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="">
             <span>Instagram</span>
         </a>
-
-        <!-- Game Link -->
         <a class="link-btn" href="https://www.roblox.com/games/10153090410/DROPSHIFT-alpha" target="_blank" aria-label="Game">
             <img src="https://tr.rbxcdn.com/180DAY-1f1242614b82cf0a6bd07c68b94942ea/768/432/Image/Webp/noFilter" alt="">
             <span>Game</span>
         </a>
-
-        <!-- Action Buttons -->
-        <button class="link-btn action-btn" onclick="triggerPulse()" aria-label="Pulse Animation">
-            <img src="https://via.placeholder.com/200x120.png?text=Pulse" alt="">
-            <span>Pulse</span>
+        <button class="link-btn modal-btn" id="infoBtn" aria-label="More Information">
+            <img src="info-image.jpg" alt="">
+            <span>More Info</span>
         </button>
-
-        <button class="link-btn action-btn" onclick="openRandomLink()" aria-label="Random Link">
-            <img src="https://via.placeholder.com/200x120.png?text=Random" alt="">
-            <span>Random Link</span>
+        <button class="link-btn theme-btn" id="themeBtn" aria-label="Toggle Theme">
+            <img src="theme-image.jpg" alt="">
+            <span>Toggle Theme</span>
         </button>
     </div>
 
-    <!-- Clock Widget -->
-    <div class="clock-widget" id="clock">00:00:00</div>
-
-    <!-- Weather Widget -->
-    <div class="weather-widget" id="weather">Weather: Loading...</div>
+    <!-- Info Modal -->
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeInfo">×</span>
+            <h2>About This Hub</h2>
+            <p>Welcome to my advanced link hub, styled in the Frutiger Aero aesthetic. Explore my socials, games, and more with interactive features like theme switching and animations.</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -600,350 +598,282 @@
         <button id="muteBtn">🔊</button>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal" id="infoModal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeModal">×</span>
-            <h2>About This Site</h2>
-            <p>This is a Frutiger Aero-inspired link page with Windows XP sounds and advanced interactivity. Enjoy the glossy vibes!</p>
-        </div>
-    </div>
-
     <!-- Audio Elements -->
-    <audio id="hoverSound"></audio>
-    <audio id="clickSound"></audio>
-    <audio id="pulseSound"></audio>
-    <audio id="startupSound"></audio>
-    <audio id="errorSound"></audio>
+    <audio id="hoverSound" src="hover-sound.mp3"></audio>
+    <audio id="clickSound" src="click-sound.mp3"></audio>
+    <audio id="bgMusic" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Random Frutiger Aero Backgrounds from Pinterest
-        const frutigerBackgrounds = [
-            'https://i.pinimg.com/originals/45/12/3e/45123e3e8b87c7b7f6d8e8e0b7f1b2e3.jpg',
-            'https://i.pinimg.com/originals/7c/8f/5b/7c8f5b8e7e8e8e8e8e8e8e8e8e8e8e8e.jpg',
-            'https://i.pinimg.com/originals/9e/3b/4e/9e3b4e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg',
-            'https://i.pinimg.com/originals/2d/5f/8e/2d5f8e8e8e8e8e8e8e8e8e8e8e8e8e8e.jpg'
+        // Array of Pinterest image URLs
+        const pinterestImages = [
+            'https://i.pinimg.com/736x/c5/60/bd/c560bda6714d7bf7190d13aba7b537c0.jpg',
+            'https://i.pinimg.com/736x/ab/94/73/ab9473ccc1ea82b0c7637321abf547fd.jpg',
+            'https://i.pinimg.com/736x/35/3f/45/353f4505da3ade2af9b2b33cf2eba3b.jpg',
+            'https://i.pinimg.com/736x/31/17/bf/3117bf66929010ab90238e15d66b32a9.jpg',
+            'https://i.pinimg.com/236x/06/2c/a6/062ca6beff7eb8cdfb1819ead103ee8d.jpg',
+            'https://i.pinimg.com/236x/18/ad/e0/18ade0ed4450c6713b539a1dc5987004.jpg',
+            'https://i.pinimg.com/236x/a3/1c/24/a31c24ac19746465efb18b014fb8d462.jpg',
+            'https://i.pinimg.com/736x/c7/b9/29/c7b929bc7a653e1d6e5dc5912d268550.jpg',
+            'https://i.pinimg.com/236x/05/23/2a/05232a2d25e22d6a26410680804c337d.jpg',
+            'https://i.pinimg.com/474x/26/97/c0/2697c01bc665bc94f40307e82e0f0170.jpg',
+            'https://i.pinimg.com/236x/d9/87/11/d9871139a4f953f3f960f76cde26e930.jpg',
+            'https://i.pinimg.com/736x/2b/cd/75/2bcd75d1b24f2309bce80d5bac13ebc5.jpg',
+            'https://i.pinimg.com/736x/54/00/60/5400608f538007d1586ddf709ef9cc87.jpg',
+            'https://i.pinimg.com/736x/95/84/6d/95846d62c56a38e7a5474844f58cd55c.jpg'
         ];
 
-        function setRandomBackground() {
-            const randomIndex = Math.floor(Math.random() * frutigerBackgrounds.length);
-            document.body.style.backgroundImage = `url(${frutigerBackgrounds[randomIndex]})`;
-            document.body.style.backgroundColor = 'transparent';
+        // Function to select a random image from the array
+        function getRandomImage() {
+            const randomIndex = Math.floor(Math.random() * pinterestImages.length);
+            return pinterestImages[randomIndex];
         }
 
-        // Sound Sources
-        const soundSources = {
-            hover: [
-                'https://www.myinstants.com/media/sounds/frutiger-hover.mp3', // Placeholder
-                'https://www.myinstants.com/media/sounds/wii-menu-hover.mp3'  // Placeholder
-            ],
-            click: [
-                'https://www.myinstants.com/media/sounds/windows-xp-click.mp3',
-                'https://www.myinstants.com/media/sounds/frutiger-click.mp3'  // Placeholder
-            ],
-            pulse: [
-                'https://www.myinstants.com/media/sounds/frutiger-pulse.mp3', // Placeholder
-                'https://www.myinstants.com/media/sounds/aero-chime.mp3'     // Placeholder
-            ],
-            startup: [
-                'https://www.myinstants.com/media/sounds/windows-xp-startup.mp3',
-                'https://www.myinstants.com/media/sounds/vista-startup.mp3'   // Placeholder
-            ],
-            error: [
-                'https://www.myinstants.com/media/sounds/windows-xp-error.mp3',
-                'https://www.myinstants.com/media/sounds/aero-error.mp3'     // Placeholder
-            ]
+        // Function to load and verify the background image
+        function loadBackgroundImage(attempt = 0) {
+            const maxAttempts = pinterestImages.length; // Maximum retries based on array length
+            if (attempt >= maxAttempts) {
+                console.log('All images failed to load. Using fallback background color.');
+                document.body.style.backgroundColor = '#0a1c2b'; // Ensure fallback color is set
+                loadPage(); // Proceed with page loading even if images fail
+                return;
+            }
+
+            const img = new Image();
+            const imageUrl = getRandomImage();
+            img.src = imageUrl;
+
+            img.onload = function() {
+                // Image loaded successfully, set it as background
+                document.body.style.backgroundImage = `url(${imageUrl})`;
+                loadPage(); // Proceed with page loading
+            };
+
+            img.onerror = function() {
+                // Image failed to load, try the next image
+                console.log(`Failed to load image: ${imageUrl}, attempting next image... (${attempt + 1}/${maxAttempts})`);
+                loadBackgroundImage(attempt + 1); // Retry with the next image
+            };
+        }
+
+        // WebGL Background with Reflective Sphere
+        function initWebGLBackground() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('webgl-background').appendChild(renderer.domElement);
+
+            // Create a reflective sphere
+            const geometry = new THREE.SphereGeometry(5, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x00bcd4,
+                shininess: 100,
+                specular: 0xffffff,
+                reflectivity: 1,
+                envMap: new THREE.CubeTextureLoader().load([
+                    'https://threejs.org/examples/textures/cube/Bridge2/posx.jpg',
+                    'https://threejs.org/examples/textures/cube/Bridge2/negx.jpg',
+                    'https://threejs.org/examples/textures/cube/Bridge2/posy.jpg',
+                    'https://threejs.org/examples/textures/cube/Bridge2/negy.jpg',
+                    'https://threejs.org/examples/textures/cube/Bridge2/posz.jpg',
+                    'https://threejs.org/examples/textures/cube/Bridge2/negz.jpg'
+                ])
+            });
+            const sphere = new THREE.Mesh(geometry, material);
+            scene.add(sphere);
+
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+
+            camera.position.z = 15;
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                sphere.rotation.x += 0.01;
+                sphere.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            });
+        }
+
+        // Generate Particles for Background
+        function createParticles() {
+            const particleContainer = document.getElementById('particles');
+            const particleCount = 50; // Increased number of particles
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        // Custom Cursor with Trail
+        function initCustomCursor() {
+            const cursor = document.getElementById('cursor');
+            const cursorTrail = document.getElementById('cursor-trail');
+            let trailX = 0, trailY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+
+                // Smooth trail effect
+                const deltaX = e.clientX - trailX;
+                const deltaY = e.clientY - trailY;
+                trailX += deltaX * 0.2;
+                trailY += deltaY * 0.2;
+                cursorTrail.style.left = `${trailX}px`;
+                cursorTrail.style.top = `${trailY}px`;
+            });
+
+            // Enlarge cursor on hover
+            document.querySelectorAll('.link-btn, a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.background = 'radial-gradient(circle, rgba(0, 255, 234, 1), transparent 70%)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.background = 'radial-gradient(circle, rgba(0, 255, 234, 0.8), transparent 70%)';
+                });
+            });
+        }
+
+        // Initialize 3D Tilt Effect on Buttons
+        function initTiltEffect() {
+            VanillaTilt.init(document.querySelectorAll('.link-btn'), {
+                max: 25,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.5
+            });
+        }
+
+        // Set random background image, WebGL, particles, and cursor on page load
+        window.onload = function() {
+            loadBackgroundImage();
+            initWebGLBackground();
+            createParticles();
+            initCustomCursor();
+            initTiltEffect();
         };
 
-        function setRandomSound(elementId, soundType) {
-            const soundElement = document.getElementById(elementId);
-            const randomIndex = Math.floor(Math.random() * soundSources[soundType].length);
-            soundElement.src = soundSources[soundType][randomIndex];
+        // Loading Screen Progress and Page Load
+        function loadPage() {
+            const progressBar = document.querySelector('.progress-bar');
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 1;
+                progressBar.style.width = `${progress}%`;
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    setTimeout(() => {
+                        const loadingScreen = document.querySelector('.loading-screen');
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 500);
+                }
+            }, 20);
+
+            // Typing Effect for Intro with Holographic Effect
+            const text = "My Link Hub";
+            const typingText = document.getElementById('typing-text');
+            let index = 0;
+            function type() {
+                if (index < text.length) {
+                    typingText.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100);
+                } else {
+                    document.querySelector('.intro p').style.opacity = '1';
+                }
+            }
+            type();
         }
 
-        // Initialize Sounds
-        function initializeSounds() {
-            setRandomSound('hoverSound', 'hover');
-            setRandomSound('clickSound', 'click');
-            setRandomSound('pulseSound', 'pulse');
-            setRandomSound('startupSound', 'startup');
-            setRandomSound('errorSound', 'error');
-        }
+        // Modal Functionality
+        const infoModal = document.getElementById('infoModal');
+        const infoBtn = document.getElementById('infoBtn');
+        const closeInfo = document.getElementById('closeInfo');
 
-        // Sound Effects
+        infoBtn.addEventListener('click', () => {
+            infoModal.style.display = 'flex';
+            clickSound.play();
+        });
+
+        closeInfo.addEventListener('click', () => {
+            infoModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                infoModal.style.display = 'none';
+            }
+        });
+
+        // Theme Toggle
+        const themeBtn = document.getElementById('themeBtn');
+        let isDarkMode = false;
+        themeBtn.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            clickSound.play();
+            themeBtn.querySelector('span').textContent = isDarkMode ? 'Light Theme' : 'Dark Theme';
+        });
+
+        // Sound Management
         const buttons = document.querySelectorAll('.link-btn');
         const hoverSound = document.getElementById('hoverSound');
         const clickSound = document.getElementById('clickSound');
-        const pulseSound = document.getElementById('pulseSound');
-        const startupSound = document.getElementById('startupSound');
-        const errorSound = document.getElementById('errorSound');
+        const bgMusic = document.getElementById('bgMusic');
         let isMuted = false;
         const muteBtn = document.getElementById('muteBtn');
-        let windowsSoundsEnabled = true;
-        const volumeControl = document.getElementById('volumeControl');
+
+        bgMusic.volume = 0.3;
+        bgMusic.play().catch(() => console.log('Autoplay prevented'));
 
         muteBtn.addEventListener('click', () => {
             isMuted = !isMuted;
             muteBtn.textContent = isMuted ? '🔇' : '🔊';
-            updateVolume();
+            bgMusic.muted = isMuted;
+            hoverSound.muted = isMuted;
+            clickSound.muted = isMuted;
         });
-
-        volumeControl.addEventListener('input', updateVolume);
-
-        function updateVolume() {
-            const volume = isMuted ? 0 : volumeControl.value;
-            hoverSound.volume = volume;
-            clickSound.volume = volume;
-            pulseSound.volume = volume;
-            startupSound.volume = volume;
-            errorSound.volume = volume;
-        }
 
         buttons.forEach(button => {
             button.addEventListener('mouseenter', () => {
                 if (!isMuted) hoverSound.play();
             });
             button.addEventListener('click', () => {
-                if (!isMuted && windowsSoundsEnabled) clickSound.play();
+                if (!isMuted) clickSound.play();
             });
-        });
-
-        // Play Startup Sound and Set Background on Load
-        window.addEventListener('load', () => {
-            initializeSounds();
-            if (!isMuted && windowsSoundsEnabled) startupSound.play();
-            setRandomBackground();
-            showNotification('Welcome to My Link Page!');
-            updateVolume();
         });
 
         // Copy Discord Tag
         function copyDiscordTag() {
             navigator.clipboard.writeText('@inceptual').then(() => {
-                showNotification('Discord tag copied to clipboard!');
-                if (!isMuted && windowsSoundsEnabled) clickSound.play();
-            }).catch(() => {
-                if (!isMuted && windowsSoundsEnabled) errorSound.play();
+                alert('Discord tag copied to clipboard!');
             });
         }
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            if (!isMuted && windowsSoundsEnabled) clickSound.play();
-        });
-
-        // Random Background Color
-        const randomColor = document.getElementById('randomColor');
-        randomColor.addEventListener('click', () => {
-            const r = Math.floor(Math.random() * 255);
-            const g = Math.floor(Math.random() * 255);
-            const b = Math.floor(Math.random() * 255);
-            document.body.style.background = `linear-gradient(135deg, rgb(${r}, ${g}, ${b}), rgb(${g}, ${b}, ${r}))`;
-            document.body.style.backgroundImage = 'none';
-            if (!isMuted && windowsSoundsEnabled) clickSound.play();
-        });
-
-        // Pulse Animation
-        function triggerPulse() {
-            document.body.style.animation = 'pulse 1s ease';
-            if (!isMuted) pulseSound.play();
-            setTimeout(() => document.body.style.animation = '', 1000);
-        }
-
-        // Random Link
-        const links = [
-            'https://www.roblox.com/users/1075639086/profile',
-            'https://discord.gg/CufQSvGrfx',
-            'https://www.instagram.com/inceptivity/?utm_source=ig_web_button_share_sheet',
-            'https://www.roblox.com/games/10153090410/DROPSHIFT-alpha'
-        ];
-        function openRandomLink() {
-            const randomIndex = Math.floor(Math.random() * links.length);
-            window.open(links[randomIndex], '_blank');
-            if (!isMuted && windowsSoundsEnabled) clickSound.play();
-        }
-
-        // Clock Widget
-        function updateClock() {
-            const now = new Date();
-            const time = now.toLocaleTimeString();
-            document.getElementById('clock').textContent = time;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Weather Widget (Mock Data)
-        function updateWeather() {
-            const mockWeather = `Weather: Sunny, 72°F`; // Replace with real API call if desired
-            document.getElementById('weather').textContent = mockWeather;
-        }
-        updateWeather();
-
-        // Modal
-        const modal = document.getElementById('infoModal');
-        const showModal = document.getElementById('showModal');
-        const closeModal = document.getElementById('closeModal');
-
-        showModal.addEventListener('click', () => {
-            modal.style.display = 'flex';
-            if (!isMuted && windowsSoundsEnabled) clickSound.play();
-        });
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            if (!isMuted && windowsSoundsEnabled) clickSound.play();
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                if (!isMuted && windowsSoundsEnabled) clickSound.play();
-            }
-        });
-
-        // Settings Panel
-        const settingsBtn = document.getElementById('settingsBtn');
-        const settingsPanel = document.getElementById('settingsPanel');
-        const cursorTrailToggle = document.getElementById('cursorTrailToggle');
-        const particlesToggle = document.getElementById('particlesToggle');
-        const windowsSoundsToggle = document.getElementById('windowsSoundsToggle');
-        const particleDensity = document.getElementById('particleDensity');
-
-        settingsBtn.addEventListener('click', () => {
-            settingsPanel.style.display = settingsPanel.style.display === 'block' ? 'none' : 'block';
-            if (!isMuted && windowsSoundsEnabled) clickSound.play();
-        });
-
-        windowsSoundsToggle.addEventListener('change', () => {
-            windowsSoundsEnabled = windowsSoundsToggle.checked;
-            if (!windowsSoundsEnabled && !isMuted) errorSound.play();
-        });
-
-        // Notification System
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
-        }
-
-        // Enhanced Particle Effect
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particlesArray = [];
-        let numberOfParticles = 50;
-        let particlesEnabled = true;
-        let mouse = { x: null, y: null };
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.size > 0.2) this.size -= 0.01;
-
-                const dx = mouse.x - this.x;
-                const dy = mouse.y - this.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 100) {
-                    this.speedX += dx / 1000;
-                    this.speedY += dy / 1000;
-                }
-            }
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = [];
-            numberOfParticles = particleDensity.value;
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animateParticles() {
-            if (!particlesEnabled) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-                if (particlesArray[i].size <= 0.2) {
-                    particlesArray.splice(i, 1);
-                    i--;
-                    particlesArray.push(new Particle());
-                }
-            }
-            requestAnimationFrame(animateParticles);
-        }
-
-        particlesToggle.addEventListener('change', () => {
-            particlesEnabled = particlesToggle.checked;
-            if (particlesEnabled) animateParticles();
-            else ctx.clearRect(0, 0, canvas.width, canvas.height);
-        });
-
-        particleDensity.addEventListener('change', initParticles);
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
-
-        initParticles();
-        animateParticles();
-
-        // Enhanced Cursor Trail
-        let trailEnabled = true;
-        const trailElements = [];
-
-        document.addEventListener('mousemove', (e) => {
-            if (!trailEnabled) return;
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.left = `${e.pageX - 6}px`;
-            trail.style.top = `${e.pageY - 6}px`;
-            trail.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
-            document.body.appendChild(trail);
-            trailElements.push(trail);
-
-            setTimeout(() => {
-                trail.style.transform = 'scale(0)';
-                trail.style.opacity = '0';
-                setTimeout(() => {
-                    trail.remove();
-                    trailElements.shift();
-                }, 300);
-            }, 400);
-        });
-
-        cursorTrailToggle.addEventListener('change', () => {
-            trailEnabled = cursorTrailToggle.checked;
-            if (!trailEnabled) trailElements.forEach(el => el.remove());
-        });
     </script>
 </body>
 </html>
